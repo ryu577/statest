@@ -1,6 +1,6 @@
-from stochproc.quantile.estimate import *
-from stochproc.quantile.expon_based_estimators import expon_frac, prcntl
-from stochproc.quantile.some_distributions import *
+from statest.quantile.estimate import *
+from statest.quantile.expon_based_estimators import expon_frac, prcntl
+from statest.quantile.some_distributions import *
 import numpy as np
 
 
