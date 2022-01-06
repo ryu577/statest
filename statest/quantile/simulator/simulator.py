@@ -1,5 +1,5 @@
 from statest.quantile.estimate import *
-from statest.quantile.expon_based_estimators import prcntl, prcntl2
+from statest.quantile.expon_based_estimators import prcntl, prcntl2, prcntl3, prcntl4, prcntl5
 from statest.quantile.some_distributions import *
 from statest.quantile.perf_measurer import PrcntlEstPerfMeasurer
 import numpy as np
@@ -9,13 +9,13 @@ import os
 
 
 ## Set these parameters manually before running the code.
-data_save_dir = ".\\sim_data\\"
-plots_save_dir = ".\\plots\\"
+data_save_dir = "./sim_data/"
+plots_save_dir = "./plots/"
 rvs_fn = rvs_fn5
 ppf_fn = ppf_fn5
 distr_name = "Weibull_Min"
 # The percentiles to compare performance for.
-qs = np.arange(0.01, .94, 0.03)
+qs = np.arange(0.01, 1.0, 0.03)
 
 
 # Enumerate the estimators.
@@ -23,14 +23,16 @@ def main1():
     prcntl_estimators = [prcntl, est_1, est_7,
                          est_2, est_3, est_4,
                          est_5, est_6,
-                         est_8, est_9]
+                         est_8, est_9, prcntl2, prcntl3,
+                         prcntl4]
 
     names = ["expon_bias", "r_strat1",
              "r_strat7",
              "r_strat2", "r_strat3",
              "r_strat4", "r_strat5",
              "r_strat6",
-             "r_strat8", "r_strat9"]
+             "r_strat8", "r_strat9", "expon_bias_m=2",
+             "expon_mle", "expon_bias_max_m"]
 
     prf_results = []
 
@@ -57,32 +59,32 @@ def main1():
         ax3.plot(qs, prf1.u_medians, label="DelMedian for " + name)
         ax4.plot(qs, prf1.u_mses, label="MSE for " + name)
 
-        np.savetxt(data_save_dir + "\\qs.csv", qs, delimiter=",")
-        base_path = data_save_dir + distr_name + "\\" + name
+        np.savetxt(data_save_dir + "/qs.csv", qs, delimiter=",")
+        base_path = data_save_dir + distr_name + "/" + name
         if not os.path.exists(base_path):
             os.makedirs(base_path)
-        np.savetxt(data_save_dir + distr_name + "\\" +
-                   name + "\\u_errs.csv", prf1.u_errs, delimiter=",")
-        np.savetxt(data_save_dir + distr_name + "\\" +
-                   name + "\\u_stds.csv", prf1.u_stds, delimiter=",")
-        np.savetxt(data_save_dir + distr_name + "\\" +
-                   name + "\\u_medians.csv", prf1.u_medians, delimiter=",")
-        np.savetxt(data_save_dir + distr_name + "\\" +
-                   name + "\\u_mses.csv", prf1.u_mses, delimiter=",")
+        np.savetxt(data_save_dir + distr_name + "/" +
+                   name + "/u_errs.csv", prf1.u_errs, delimiter=",")
+        np.savetxt(data_save_dir + distr_name + "/" +
+                   name + "/u_stds.csv", prf1.u_stds, delimiter=",")
+        np.savetxt(data_save_dir + distr_name + "/" +
+                   name + "/u_medians.csv", prf1.u_medians, delimiter=",")
+        np.savetxt(data_save_dir + distr_name + "/" +
+                   name + "/u_mses.csv", prf1.u_mses, delimiter=",")
 
         print("###############")
         print("Finished processing " + name)
         print("###############")
 
     make_lines(ax1, ax2, ax3, ax4)
-    base_path = plots_save_dir + distr_name + "\\" + name
+    base_path = plots_save_dir + distr_name + "/" + name
     if not os.path.exists(base_path):
         os.makedirs(base_path)
-    fig1.savefig(plots_save_dir + distr_name + "\\" + name + "\\biases.png")
-    fig2.savefig(plots_save_dir + distr_name + "\\" + name + "\\st_devs.png")
-    fig3.savefig(plots_save_dir + distr_name + "\\" +
-                 name + "\\del_medians.png")
-    fig4.savefig(plots_save_dir + distr_name + "\\" + name + "\\mses.png")
+    fig1.savefig(plots_save_dir + distr_name + "/" + name + "/biases.png")
+    fig2.savefig(plots_save_dir + distr_name + "/" + name + "/st_devs.png")
+    fig3.savefig(plots_save_dir + distr_name + "/" +
+                 name + "/del_medians.png")
+    fig4.savefig(plots_save_dir + distr_name + "/" + name + "/mses.png")
     plt.xlabel("Percentile (q)")
     plt.show()
     return prf_results
@@ -99,16 +101,16 @@ def make_plots_from_disk():
              "r_strat4", "r_strat5",
              "r_strat6",
              "r_strat8", "r_strat9"]
-    qs = genfromtxt(data_save_dir + "\\qs.csv", delimiter=",")
+    qs = genfromtxt(data_save_dir + "/qs.csv", delimiter=",")
     for name in names:
-        u_errs = genfromtxt(data_save_dir + distr_name + "\\" +
-                            name + "\\u_errs.csv", delimiter=',')
-        u_stds = genfromtxt(data_save_dir + distr_name + "\\" +
-                            name + "\\u_stds.csv", delimiter=',')
-        u_medians = genfromtxt(data_save_dir + distr_name + "\\" +
-                               name + "\\u_medians.csv", delimiter=',')
-        u_mses = genfromtxt(data_save_dir + distr_name + "\\" +
-                            name + "\\u_mses.csv", delimiter=',')
+        u_errs = genfromtxt(data_save_dir + distr_name + "/" +
+                            name + "/u_errs.csv", delimiter=',')
+        u_stds = genfromtxt(data_save_dir + distr_name + "/" +
+                            name + "/u_stds.csv", delimiter=',')
+        u_medians = genfromtxt(data_save_dir + distr_name + "/" +
+                               name + "/u_medians.csv", delimiter=',')
+        u_mses = genfromtxt(data_save_dir + distr_name + "/" +
+                            name + "/u_mses.csv", delimiter=',')
         ax1.plot(qs, u_errs, label="Bias for " + name)
         ax2.plot(qs, u_stds, label="Standard deviation for " + name)
         ax3.plot(qs, u_medians, label="DelMedian for " + name)

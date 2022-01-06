@@ -52,6 +52,8 @@ def est_3(a, p):
         gamma = 1
     # The indexing here is one off from the R documentation because
     # python starts at 0
+    if j > n-1:
+        return a[n-1]
     return a[j-1]*(1-gamma)+a[j]*gamma
 
 
@@ -60,6 +62,8 @@ def est_4(a, p):
     n = len(a)
     j = int(np.floor(p*n))
     gamma = n*p-j
+    if j > n-1:
+        return a[n-1]
     return a[j-1]*(1-gamma)+a[j]*gamma
 
 
@@ -69,6 +73,8 @@ def est_5(a, p):
     n = len(a)
     j = int(np.floor(p*n+m))
     gamma = n*p-j
+    if j > n-1:
+        return a[n-1]
     return a[j-1]*(1-gamma)+a[j]*gamma+m
 
 
@@ -78,6 +84,8 @@ def est_6(a, p):
     n = len(a)
     j = int(np.floor(p*n+m))
     gamma = n*p-j
+    if j > n-1:
+        return a[n-1]
     return a[j-1]*(1-gamma)+a[j]*gamma+m
 
 
