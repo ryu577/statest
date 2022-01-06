@@ -91,6 +91,8 @@ def est_8(a, p):
     n = len(a)
     j = int(np.floor(p*n+m))
     gamma = n*p-j
+    if j > n-1:
+        return a[n-1]
     return a[j-1]*(1-gamma)+a[j]*gamma+m
 
 
@@ -100,6 +102,8 @@ def est_9(a, p):
     n = len(a)
     j = int(np.floor(p*n+m))
     gamma = n*p-j
+    if j > n-1:
+        return a[n-1]
     return a[j-1]*(1-gamma)+a[j]*gamma+m
 
 
