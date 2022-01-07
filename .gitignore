@@ -1,5 +1,6 @@
 #ignore all kind of files
 *.*
+build/
 #except py files
 !*.py
 !*.md
