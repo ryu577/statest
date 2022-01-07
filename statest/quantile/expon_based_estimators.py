@@ -83,3 +83,38 @@ def prcntl5(a, q):
         summ2 += a[j]
     u = u - b/(n-i)*summ2
     return u
+
+
+def prcntl_general(a, q, i, m):
+    a = sorted(a)
+    n = len(a)
+    summ = 0
+    for j in range(i):
+        summ += 1/(n-j)
+    b = summ + np.log(1-q)
+    u = (1+b/m*(m-1)+b/m*(n-i-m+1))*a[i-1]
+    summ2 = 0
+    for j in range(i, i+m-1):
+        summ2 += a[j]
+    u = u - b/m*summ2
+    # Index error for high percentiles.
+    u = u - b/m*a[i+m-1]*(n-i-m+1)
+    return u
+
+
+def prcntl6(a, p):
+    a = sorted(a)
+    n = len(a)
+    j = int(np.floor(p*n))
+    if j > n-1:
+        return a[n-1]
+    return prcntl_general(a, p, j, 1)
+
+
+def prcntl7(a, p):
+    a = sorted(a)
+    n = len(a)
+    j = int(np.floor(p*n))
+    if j > n-1:
+        return a[n-1]
+    return prcntl_general(a, p, j, 2)

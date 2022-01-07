@@ -1,4 +1,4 @@
-from scipy.stats import norm, lognorm, expon, lomax, weibull_min
+from scipy.stats import norm, lognorm, expon, lomax, weibull_min, fisk
 import numpy as np
 
 
@@ -22,6 +22,10 @@ def rvs_fn5(n):
     return weibull_min.rvs(c=5, size=n)
 
 
+def rvs_fn6(n):
+    return fisk.rvs(c=.3, size=n)
+
+
 def ppf_fn1(q):
     return norm.ppf(q, 10, 1)
 
@@ -40,3 +44,7 @@ def ppf_fn4(q):
 
 def ppf_fn5(q):
     return weibull_min.ppf(q, c=5)
+
+
+def ppf_fn6(q):
+    return fisk.ppf(q, c=.3)

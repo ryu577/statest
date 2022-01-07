@@ -11,9 +11,9 @@ import os
 ## Set these parameters manually before running the code.
 data_save_dir = "./sim_data/"
 plots_save_dir = "./plots/"
-rvs_fn = rvs_fn5
-ppf_fn = ppf_fn5
-distr_name = "Weibull_Min"
+rvs_fn = rvs_fn4
+ppf_fn = ppf_fn4
+distr_name = "Lomax"
 # The percentiles to compare performance for.
 qs = np.arange(0.01, 1.0, 0.03)
 
@@ -59,6 +59,8 @@ def main1():
         ax3.plot(qs, prf1.u_medians, label="DelMedian for " + name)
         ax4.plot(qs, prf1.u_mses, label="MSE for " + name)
 
+        if not os.path.exists(data_save_dir):
+            os.makedirs(data_save_dir)
         np.savetxt(data_save_dir + "/qs.csv", qs, delimiter=",")
         base_path = data_save_dir + distr_name + "/" + name
         if not os.path.exists(base_path):

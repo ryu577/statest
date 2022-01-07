@@ -1,8 +1,9 @@
 # This is for comparing new bias removal and variance minimizing strategy.
-from stochproc.quantile.estimate import *
-from stochproc.quantile.expon_based_estimators import prcntl, prcntl2, prcntl3, prcntl4, prcntl5
-from stochproc.quantile.some_distributions import *
-from stochproc.quantile.perf_measurer import PrcntlEstPerfMeasurer
+from statest.quantile.estimate import *
+from statest.quantile.expon_based_estimators \
+    import prcntl, prcntl2, prcntl3, prcntl4, prcntl5, prcntl6, prcntl7
+from statest.quantile.some_distributions import *
+from statest.quantile.perf_measurer import PrcntlEstPerfMeasurer
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -22,15 +23,17 @@ def make_lines(ax1, ax2, ax3, ax4):
     ax4.legend()
 
 
-rvs_fn = rvs_fn4
-ppf_fn = ppf_fn4
-distr_name = "Lomax"
-qs = np.arange(0.05, .7, 0.05)
+rvs_fn = rvs_fn6
+ppf_fn = ppf_fn6
+distr_name = "Fisk"
+qs = np.arange(0.05, 0.8, 0.05)
 
-prcntl_estimators = [prcntl, prcntl2, prcntl4, prcntl5, est_7]
+prcntl_estimators = [prcntl, prcntl6,
+                     prcntl7, est_4, est_9]
 
-names = ["expon_bias", "var_min", "var_total_min",
-         "start_at_3", "r_strat7"]
+names = ["no_bias_1", "no_bias_2",
+         "no_bias_2_two_trms",
+         "r_strat4", "r_strat9"]
 
 prf_results = []
 
