@@ -27,6 +27,8 @@ class RaceTrack():
         self.n = n
         self.rvs_fn = distributions_holder[distr_name][0]
         self.ppf_fn = distributions_holder[distr_name][1]
+        # The number of parallel worlds to simulate. Higher is better.
+        self.prll_wrlds = 300000
 
         # The percentiles to compare performance for.
         self.qs = np.arange(0.01, 1.0, 0.03)
@@ -62,7 +64,7 @@ class RaceTrack():
                                          ppf_fn=self.ppf_fn,
                                          qs=self.qs,
                                          prcntl_estimator=prcntl_est,
-                                         prll_wrlds=30000)
+                                         prll_wrlds=self.prll_wrlds)
             prf1.simulate()
             prf_results.append(prf1)
             ax1.plot(self.qs, prf1.u_errs, label="Bias for " + name)
