@@ -50,7 +50,7 @@ def ppf_fn6(q):
     return fisk.ppf(q, c=.3)
 
 
-distributions_holder = {
+distributions_shelf = {
                         "Normal": (rvs_fn1, ppf_fn1),
                         "LogNormal": (rvs_fn2, ppf_fn2),
                         "Exponential": (rvs_fn3, ppf_fn3),
