@@ -48,3 +48,13 @@ def ppf_fn5(q):
 
 def ppf_fn6(q):
     return fisk.ppf(q, c=.3)
+
+
+distributions_holder = {
+                        "Normal": (rvs_fn1, ppf_fn1),
+                        "LogNormal": (rvs_fn2, ppf_fn2),
+                        "Exponential": (rvs_fn3, ppf_fn3),
+                        "Lomax": (rvs_fn4, ppf_fn4),
+                        "Weibull": (rvs_fn5, ppf_fn5),
+                        "LogLogistic": (rvs_fn6, ppf_fn6)
+                       }
