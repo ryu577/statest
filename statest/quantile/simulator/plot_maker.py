@@ -22,5 +22,6 @@ def make_plots_from_disk2(names_excl={},
                                     dist + "/" +
                                     name + "/u_errs.csv", delimiter=',')
                 ax.plot(qs, u_errs, label="Bias for " + name + " on " + dist)
-    make_lines(rt.ax1, rt.ax2, rt.ax3, rt.ax4)
+    make_lines(ax1, ax2, ax3, ax4)
+    plt.xlabel("Quantile (q)")
     plt.show()
