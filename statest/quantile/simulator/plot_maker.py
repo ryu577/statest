@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 def make_bias_plots_from_disk(names_excl={},
-                          names_incl=None):
+                              names_incl=None):
     rt = RaceTrack()
     fig1, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1)
     if names_incl is None:
@@ -21,9 +21,11 @@ def make_bias_plots_from_disk(names_excl={},
                 u_errs = genfromtxt(rt.data_save_dir +
                                     dist + "/" +
                                     name + "/u_errs.csv", delimiter=',')
-                ax.plot(qs, u_errs, label="Bias for " + name + " on " + dist)
-                ax.title = "Bias on distribution: " + dist
-    #make_lines(ax1, ax2, ax3, ax4)
+                ax.plot(qs, u_errs, label=name)
+                ax.set_title("Distribution: " + dist)
+                if ix < 3:
+                    ax.set_xticks([])
+    make_lines(ax1, ax2, ax3, ax4)
     ax1.set_ylim([-0.19, 0.4])
     ax2.set_ylim([-0.55, 0.3])
     ax3.set_ylim([-0.1, 0.1])
