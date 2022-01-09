@@ -1,6 +1,9 @@
 # statest
 A library for statistical estimation of the properties of various distributions.
 
+## Installation
+> pip install statest
+
 ## First use-case: estimate quantiles
 The <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile">R quantile function</a> has 9 estimators. The Python estimator in numpy (percentile) has only one (the seventh version in R). This library implements the remaining 8 methods.
 
