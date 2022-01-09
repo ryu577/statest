@@ -151,7 +151,7 @@ class RaceTrack():
 
 def make_lines(ax1, ax2, ax3, ax4):
     for ax in [ax1, ax2, ax3, ax4]:
-        ax.xlabel("Percentile (q)")
+        #ax.xlabel("Percentile (q)")
         ax.axhline(0, color="black")
         ax.axvline(0.5, color="black")
         ax.legend()

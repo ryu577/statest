@@ -57,27 +57,29 @@ def analyze_bias(n=55, save_close=True):
     biases4 = [prcntl_bias(q, n, 4) for q in qs]
     st_devs2 = [np.sqrt(prcntl_var(q, n, 4)) for q in qs]
     # plt.style.use('dark_background')
-    plt.plot(qs, biases1, label="Linear interpolation strategy")
-    plt.plot(qs, biases2, label="No interpolation strategy")
-    plt.plot(qs, biases3, label="No interpolation strategy other")
-    plt.plot(qs, st_devs, label="st_dev of linear interpolation")
-    plt.plot(qs, st_devs1, label="st_dev of low bias")
-    plt.plot(qs, biases4, label="Bias of low MSE strategy")
-    plt.plot(qs, st_devs2, label="st dev of low MSE strategy")
+    plt.plot(qs, biases1, label="Linear interpolation estimator")
+    plt.plot(qs, biases2, label="No interpolation (X_(i))")
+    plt.plot(qs, biases3, label="No interpolation (X_(i+1))")
+    #plt.plot(qs, st_devs, label="st_dev of linear interpolation")
+    #plt.plot(qs, st_devs1, label="st_dev of low bias")
+    #plt.plot(qs, biases4, label="Bias of low MSE strategy")
+    #plt.plot(qs, st_devs2, label="st dev of low MSE strategy")
 
     # plt.plot(np.arange(0.1,1.0,0.01), biases3)
-    plt.axhline(0, color="white")
+    plt.axhline(0, color="black")
     fn1 = lambda q: prcntl_bias(q, n)
     rt = root_scalar(fn1, bracket=[0, 1], method='bisect').root
     print("Unbiased percentile: " + str(rt))
-    plt.axvline(rt, color="white")
+    plt.axvline(rt, color="black")
     plt.title("Sample size n=" + str(n) + " \nPercentile with no bias is: " + str("{:.2f}".format(rt*100)))
-    plt.xlabel("Percentile (q)")
+    plt.xlabel("Quantile (q)")
     plt.ylabel("Bias for the exponential distribution")
     plt.legend()
     if save_close:
         plt.savefig('plots/sample_' + str(n) + '.png')
         plt.close()
+    else:
+        plt.show()
 
 
 def make_bias_gif():

@@ -23,9 +23,10 @@ def make_bias_plots_from_disk(names_excl={},
                                     name + "/u_errs.csv", delimiter=',')
                 ax.plot(qs, u_errs, label="Bias for " + name + " on " + dist)
                 ax.title = "Bias on distribution: " + dist
-    make_lines(ax1, ax2, ax3, ax4)
+    #make_lines(ax1, ax2, ax3, ax4)
     ax1.set_ylim([-0.19, 0.4])
     ax2.set_ylim([-0.55, 0.3])
     ax3.set_ylim([-0.1, 0.1])
     ax4.set_ylim([-1.5, 0.05])
+    plt.xlabel("Quantile (q)")
     plt.show()
