@@ -25,5 +25,4 @@ rt.race()
 The avaiable distributions are: Normal, LogNormal, LogLogistic, Weibull, Lomax and Exponential.
 
 ## Resources
-Based on the paper: https://arxiv.org/abs/2201.01421
-And the blog: https://towardsdatascience.com/hear-me-out-i-found-a-better-way-to-estimate-the-median-5c4971be4278
+Based on the paper: https://arxiv.org/abs/2201.01421 and the blog: https://towardsdatascience.com/hear-me-out-i-found-a-better-way-to-estimate-the-median-5c4971be4278
